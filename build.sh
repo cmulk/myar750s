@@ -16,3 +16,6 @@ tar -xaf imagebuilder.tar.zst --strip-components 1
 
 make image PROFILE="$PROFILE" PACKAGES="${BASE_PACKAGES} ${EXTRA_PACKAGES}"
 
+
+# mv bin/targets/ath79/nand/openwrt-*-ath79-nand-glinet_gl-ar750s-nor-nand-squashfs-sysupgrade.bin ./ar750s-sysupgrade.bin
+
