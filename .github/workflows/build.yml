@@ -1,0 +1,40 @@
+name: image-build
+# Controls when the workflow will run
+on:
+  # Triggers the workflow on push or pull request events but only for the "main" branch
+  # push:
+  #   branches: ["main"]
+  # pull_request:
+  #   branches: ["main"]
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: install dependencies
+        run: |
+          apt update
+          apt install -y  zstd build-essential libncurses-dev zlib1g-dev gawk git gettext libssl-dev xsltproc rsync wget unzip python3 python3-distutils
+
+  # upload to github release
+  release:
+    if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get current date
+        id: date
+        run: echo "date=$(date +'%Y%m%d')" >> $GITHUB_OUTPUT
+      - name: get bennu image
+        uses: actions/download-artifact@v4.1.8
+        with:
+          name: bennu.qc2
+      - name: create release
+        uses: ncipollo/release-action@v1.15.0
+        with:
+          name: release-${{ steps.date.outputs.date }}
+          artifacts: bennu.qc2
+          tag: release-${{ steps.date.outputs.date }}
+          commit: main
