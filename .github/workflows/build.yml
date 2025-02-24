@@ -13,6 +13,8 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v4
       - name: install dependencies
         run: ./install_dependencies.sh
       - name: build image
