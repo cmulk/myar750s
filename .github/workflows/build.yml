@@ -9,6 +9,9 @@ on:
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
+env:
+  OPENWRT_VERSION: "24.10.0"
+
 jobs:
   build:
     runs-on: ubuntu-22.04
@@ -40,7 +43,7 @@ jobs:
       - name: create release
         uses: ncipollo/release-action@v1.15.0
         with:
-          name: release-${{ steps.date.outputs.date }}
+          name: release-${{ env.OPENWRT_VERSION }}-${{ steps.date.outputs.date }}
           artifacts: ar750s-sysupgrade.bin
-          tag: release-${{ steps.date.outputs.date }}
+          tag: release-${{ env.OPENWRT_VERSION }}-${{ steps.date.outputs.date }}
           commit: main
