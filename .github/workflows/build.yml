@@ -16,7 +16,7 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v4
       - name: install dependencies
-        run: ./install_dependencies.sh
+        run: sudo ./install_dependencies.sh
       - name: build image
         run: ./build_image.sh
       - name: upload artifact
