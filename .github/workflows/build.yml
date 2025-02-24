@@ -18,7 +18,7 @@ jobs:
       - name: install dependencies
         run: sudo ./install_dependencies.sh
       - name: build image
-        run: ./build_image.sh
+        run: ./build.sh
       - name: upload artifact
         uses: actions/upload-artifact@v4
         with:
