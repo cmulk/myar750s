@@ -5,6 +5,9 @@
 
 set -eou pipefail
 
+mkdir -p builder
+pushd builder
+
 OPENWRT_VERSION=${OPENWRT_VERSION:-24.10.0}
 BASE_PACKAGES=${BASE_PACKAGES:-"luci ip-tiny ip-bridge nano tcpdump"}
 EXTRA_PACKAGES=${EXTRA_PACKAGES:-"-dnsmasq dnsmasq-full luci-app-travelmate luci-app-pbr luci-proto-wireguard wireguard-tools"}
@@ -16,6 +19,7 @@ tar -xaf imagebuilder.tar.zst --strip-components 1
 
 make image PROFILE="$PROFILE" PACKAGES="${BASE_PACKAGES} ${EXTRA_PACKAGES}"
 
+popd
 
-# mv bin/targets/ath79/nand/openwrt-*-ath79-nand-glinet_gl-ar750s-nor-nand-squashfs-sysupgrade.bin ./ar750s-sysupgrade.bin
+mv builder/bin/targets/ath79/nand/openwrt-*-ath79-nand-glinet_gl-ar750s-nor-nand-squashfs-sysupgrade.bin ./ar750s-sysupgrade.bin
 
