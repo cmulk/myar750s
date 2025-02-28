@@ -30,13 +30,13 @@ jobs:
           openwrt-version: ${{ env.OPENWRT_VERSION }}
           packages: "luci ip-tiny ip-bridge nano tcpdump -dnsmasq dnsmasq-full luci-app-travelmate luci-app-pbr luci-proto-wireguard wireguard-tools"
 
-      - name: list build files
-        run: ls -lh ./bin
-      # - name: upload artifact
-      #   uses: actions/upload-artifact@v4
-      #   with:
-      #     name: ar750s-sysupgrade.bin
-      #     path: ./ar750s-sysupgrade.bin
+      # - name: list build files
+      #   run: ls -lh ./bin
+      - name: upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: glinet_gl-ar750s-nor-nand-squashfs-sysupgrade.bin
+          path: ./bin/glinet_gl-ar750s-nor-nand-squashfs-sysupgrade.bin
   # upload to github release
   release:
     if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
@@ -50,11 +50,11 @@ jobs:
       - name: get  image
         uses: actions/download-artifact@v4.1.8
         with:
-          name: ar750s-sysupgrade.bin
+          name: glinet_gl-ar750s-nor-nand-squashfs-sysupgrade.bin
       - name: create release
         uses: ncipollo/release-action@v1.15.0
         with:
           name: release-${{ env.OPENWRT_VERSION }}-${{ steps.date.outputs.date }}
-          artifacts: ar750s-sysupgrade.bin
+          artifacts: glinet_gl-ar750s-nor-nand-squashfs-sysupgrade.bin
           tag: release-${{ env.OPENWRT_VERSION }}-${{ steps.date.outputs.date }}
           commit: main
