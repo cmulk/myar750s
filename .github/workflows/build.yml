@@ -23,11 +23,11 @@ jobs:
       # - name: build image
       #   run: ./build.sh
 
-      - uses: izer-xyz/openwrt-imagebuilder-action@v1
+      - uses: izer-xyz/openwrt-imagebuilder-action@v6
         with:
           image: ath79-nand
           profile: glinet_gl-ar750s-nor-nand
-          openwrt-version: 24.10.0
+          openwrt-version: ${{ env.OPENWRT_VERSION }}
           packages: "luci ip-tiny ip-bridge nano tcpdump -dnsmasq dnsmasq-full luci-app-travelmate luci-app-pbr luci-proto-wireguard wireguard-tools"
 
       - name: list build files
