@@ -1,17 +1,16 @@
+---
 name: image-build
 # Controls when the workflow will run
 on:
   # Triggers the workflow on push or pull request events but only for the "main" branch
   push:
-    branches: ["main"]
+    branches: [main]
   pull_request:
-    branches: ["main"]
+    branches: [main]
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
-
 env:
-  OPENWRT_VERSION: "24.10.4"
-
+  OPENWRT_VERSION: 24.10.4
 jobs:
   build:
     runs-on: ubuntu-22.04
@@ -20,7 +19,17 @@ jobs:
         include:
           - image: ath79-nand
             profile: glinet_gl-ar750s-nor-nand
-            packages: "luci ip-tiny ip-bridge nano tcpdump -dnsmasq dnsmasq-full luci-app-travelmate luci-app-pbr luci-proto-wireguard wireguard-tools"
+            packages: luci ip-tiny ip-bridge nano tcpdump -dnsmasq dnsmasq-full luci-app-travelmate
+              luci-app-pbr luci-proto-wireguard wireguard-tools
+          - image: ramips-mt7621
+            profile: netgear_r6220
+            packages: luci ip-tiny ip-bridge nano tcpdump -wpad-basic-wolfssl -wpad-basic-mbedtls
+              wpad-mesh-wolfssl wget iwinfo ebtables
+          - image: ramips-mt7621
+            profile: mikrotik_routerboard-750gr3
+            packages: luci ip-tiny ip-bridge nano tcpdump luci-app-ddns luci-mod-rpc
+              ca-certificates luci-app-sqm luci-proto-wireguard
+              avahi-daemon -dnsmasq dnsmasq-full
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v4
@@ -28,7 +37,6 @@ jobs:
       #   run: sudo ./install_dependencies.sh
       # - name: build image
       #   run: ./build.sh
-
       - uses: izer-xyz/openwrt-imagebuilder-action@v6
         with:
           image: ${{ matrix.image }}
@@ -61,6 +69,6 @@ jobs:
         uses: ncipollo/release-action@v1
         with:
           name: release-${{ env.OPENWRT_VERSION }}-${{ steps.date.outputs.date }}
-          artifacts: "*.bin"
+          artifacts: '*.bin'
           tag: release-${{ env.OPENWRT_VERSION }}-${{ steps.date.outputs.date }}
           commit: main
