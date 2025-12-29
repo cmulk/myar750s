@@ -10,7 +10,7 @@ on:
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 env:
-  OPENWRT_VERSION: 24.10.4
+  OPENWRT_VERSION: 24.10.5
 jobs:
   build:
     runs-on: ubuntu-22.04
