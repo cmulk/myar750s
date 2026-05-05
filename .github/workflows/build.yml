@@ -37,7 +37,7 @@ jobs:
       #   run: sudo ./install_dependencies.sh
       # - name: build image
       #   run: ./build.sh
-      - uses: izer-xyz/openwrt-imagebuilder-action@v6
+      - uses: izer-xyz/openwrt-imagebuilder-action@v7
         with:
           image: ${{ matrix.image }}
           profile: ${{ matrix.profile }}
