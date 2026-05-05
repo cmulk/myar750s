@@ -19,15 +19,15 @@ jobs:
         include:
           - image: ath79-nand
             profile: glinet_gl-ar750s-nor-nand
-            packages: luci ip-tiny ip-bridge nano tcpdump -dnsmasq dnsmasq-full luci-app-travelmate
+            packages: luci ip-full ip-bridge nano tcpdump -dnsmasq dnsmasq-full luci-app-travelmate
               luci-app-pbr luci-proto-wireguard wireguard-tools
           - image: ramips-mt7621
             profile: netgear_r6220
-            packages: luci ip-tiny ip-bridge nano tcpdump -wpad-basic-wolfssl -wpad-basic-mbedtls
+            packages: luci ip-full ip-bridge nano tcpdump -wpad-basic-wolfssl -wpad-basic-mbedtls
               wpad-mesh-wolfssl wget iwinfo ebtables
           - image: ramips-mt7621
             profile: mikrotik_routerboard-750gr3
-            packages: luci ip-tiny ip-bridge nano tcpdump luci-app-ddns luci-mod-rpc
+            packages: luci ip-full ip-bridge nano tcpdump luci-app-ddns luci-mod-rpc
               ca-certificates luci-app-sqm luci-proto-wireguard
               avahi-daemon -dnsmasq dnsmasq-full
     steps:
