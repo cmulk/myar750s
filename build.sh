@@ -8,7 +8,7 @@ set -eou pipefail
 mkdir -p builder
 pushd builder
 
-OPENWRT_VERSION=${OPENWRT_VERSION:-24.10.0}
+OPENWRT_VERSION=${OPENWRT_VERSION:-25.12.5}
 BASE_PACKAGES=${BASE_PACKAGES:-"luci ip-tiny ip-bridge nano tcpdump"}
 EXTRA_PACKAGES=${EXTRA_PACKAGES:-"-dnsmasq dnsmasq-full luci-app-travelmate luci-app-pbr luci-proto-wireguard wireguard-tools"}
 PROFILE=${PROFILE:-"glinet_gl-ar750s-nor-nand"}
