@@ -10,7 +10,7 @@ on:
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 env:
-  OPENWRT_VERSION: 25.12.2
+  OPENWRT_VERSION: 25.12.5
 jobs:
   build:
     runs-on: ubuntu-22.04
@@ -32,7 +32,7 @@ jobs:
               avahi-daemon -dnsmasq dnsmasq-full
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       # - name: install dependencies
       #   run: sudo ./install_dependencies.sh
       # - name: build image
@@ -47,7 +47,7 @@ jobs:
       # - name: list build files
       #   run: ls -lh ./bin
       - name: upload artifacts
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: ${{ matrix.profile }}-binaries
           path: ./bin/*.bin
@@ -62,7 +62,7 @@ jobs:
         id: date
         run: echo "date=$(date +'%Y%m%d')" >> $GITHUB_OUTPUT
       - name: get artifacts
-        uses: actions/download-artifact@v7
+        uses: actions/download-artifact@v8
         with:
           merge-multiple: true
       - name: create release
