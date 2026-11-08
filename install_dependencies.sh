@@ -21,11 +21,12 @@ pkgs=(
     python3
 )
 
-# On Ubuntu 24.04+ (Python 3.12+), python3-distutils is removed and replaced by python3-setuptools
-if apt-cache show python3-distutils >/dev/null 2>&1; then
+# In Ubuntu 24.04+ (Python 3.12+), python3-distutils is obsoleted with no candidate, replaced by python3-setuptools.
+# Check for an actual installation candidate before adding.
+if apt-cache policy python3-distutils 2>/dev/null | grep -q 'Candidate: [^(]'; then
     pkgs+=(python3-distutils)
 fi
-if apt-cache show python3-setuptools >/dev/null 2>&1; then
+if apt-cache policy python3-setuptools 2>/dev/null | grep -q 'Candidate: [^(]'; then
     pkgs+=(python3-setuptools)
 fi
 
