@@ -3,7 +3,7 @@
 set -euo pipefail
 
 # Default values
-OPENWRT_VERSION="${OPENWRT_VERSION:-25.12.5}"
+OPENWRT_VERSION="${OPENWRT_VERSION:-25.12.6}"
 IMAGE="${IMAGE:-ath79-nand}"
 TARGET="${TARGET:-}"
 SUBTARGET="${SUBTARGET:-}"
@@ -26,7 +26,7 @@ Build OpenWrt custom firmware images using the official OpenWrt ImageBuilder Doc
 Options:
   -i, --image <image>               Target image in <target>-<subtarget> format (e.g., ath79-nand, ramips-mt7621)
   -p, --profile <profile>           Target device profile (e.g., glinet_gl-ar750s-nor-nand)
-  -v, --version <version>           OpenWrt version (e.g., 25.12.5)
+  -v, --version <version>           OpenWrt version (e.g., 25.12.6)
   -k, --packages <packages>         Space-separated list of packages to embed or exclude (-pkg)
   -d, --bin-dir <dir>               Output directory for generated binaries (default: bin)
   -f, --files <dir>                 Directory containing custom files to include in image
