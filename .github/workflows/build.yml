@@ -33,8 +33,6 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v7
-      - name: install dependencies
-        run: sudo ./install_dependencies.sh
       - name: build image
         run: ./build.sh
         env:
