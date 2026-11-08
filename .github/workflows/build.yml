@@ -13,7 +13,7 @@ env:
   OPENWRT_VERSION: 25.12.5
 jobs:
   build:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-latest
     strategy:
       matrix:
         include:
@@ -33,16 +33,15 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v7
-      # - name: install dependencies
-      #   run: sudo ./install_dependencies.sh
-      # - name: build image
-      #   run: ./build.sh
-      - uses: izer-xyz/openwrt-imagebuilder-action@v7
-        with:
-          image: ${{ matrix.image }}
-          profile: ${{ matrix.profile }}
-          openwrt-version: ${{ env.OPENWRT_VERSION }}
-          packages: ${{ matrix.packages }}
+      - name: install dependencies
+        run: sudo ./install_dependencies.sh
+      - name: build image
+        run: ./build.sh
+        env:
+          OPENWRT_VERSION: ${{ env.OPENWRT_VERSION }}
+          IMAGE: ${{ matrix.image }}
+          PROFILE: ${{ matrix.profile }}
+          PACKAGES: ${{ matrix.packages }}
 
       # - name: list build files
       #   run: ls -lh ./bin
