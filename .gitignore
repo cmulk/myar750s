@@ -1,2 +1,4 @@
-builder
+builder*
 *.bin
+bin/
+dl/
